@@ -31,6 +31,9 @@ func Create(kind, fileName, path string)  {
 	case "pod", "po":
 	case "persistentvolumeclaim", "pvc":
 	case "configmap", "cm":
+		fullPath, err := runcmd.Execute(path, generatedFileName)
+		populatefile.IsError(err)
+		populatefile.WriteContentToFile(*fullPath, tmpl.ConfigMap)
 	case "secret", "sc":
 		fullPath, err := runcmd.Execute(path, generatedFileName)
 		populatefile.IsError(err)

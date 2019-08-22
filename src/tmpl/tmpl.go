@@ -18,6 +18,7 @@ data:
   secretKey:  BASE64_ENCODED_VALUE
 type: Opaque`
 
+
 var ServiceAccount string = `apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -77,6 +78,7 @@ spec:
       restartPolicy: Always
       imagePullPolicy: Always`
 
+
 var Kustomize string = `apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
@@ -98,4 +100,17 @@ spec:
   - name:  name-of-the-port
     port:  80
     targetPort:  8080
+`
+
+var ConfigMap = `apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-configmap
+  labels:
+    app: name
+data:
+  my-key: my-value
+ my-properties-file.yaml: |
+    # yaml file
+    key: value
 `
