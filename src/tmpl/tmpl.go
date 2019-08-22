@@ -18,6 +18,14 @@ data:
   secretKey:  BASE64_ENCODED_VALUE
 type: Opaque`
 
+var ServiceAccount string = `apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: name
+  labels:
+    app: app-name`
+
+
 var Deployment string = `apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:

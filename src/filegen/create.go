@@ -35,6 +35,9 @@ func Create(kind, fileName, path string)  {
 		populatefile.IsError(err)
 		populatefile.WriteContentToFile(*fullPath, tmpl.Secret)
 	case "serviceaccount", "sa":
+		fullPath, err := runcmd.Execute(path, generatedFileName)
+		populatefile.IsError(err)
+		populatefile.WriteContentToFile(*fullPath, tmpl.ServiceAccount)
 	case "service", "svc":
 	default:
 		log.Print(`doee`)
