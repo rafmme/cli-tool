@@ -290,3 +290,17 @@ spec:
     requests:
       storage: 3Gi
 `
+
+const Policy = `apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: name
+  labels:
+    app: app
+spec:
+  minAvailable: 1
+  maxUnavailable: 2
+  selector:
+    matchLabels:
+      app: app
+`
