@@ -19,16 +19,13 @@ func Create(kind, fileName, path string)  {
 	switch kind {
 	case "namespace", "ns":
 		fullPath, err := runcmd.Execute(path, generatedFileName)
-
-		if err != nil {
-			log.Fatal(err)
-			return
-		}
-
+		populatefile.IsError(err)
 		populatefile.WriteContentToFile(*fullPath, tmpl.Namespace)
-		break
 
-	case "deployment", "deploy":
+	case "deployment", "deploy", "dpl":
+		fullPath, err := runcmd.Execute(path, generatedFileName)
+		populatefile.IsError(err)
+		populatefile.WriteContentToFile(*fullPath, tmpl.Deployment)
 	case "persistentvolume", "pv":
 	case "pod", "po":
 	case "persistentvolumeclaim", "pvc":

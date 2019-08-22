@@ -2,26 +2,27 @@ package populatefile
 
 import (
 	"os"
+	"log"
 	"fmt"
 )
 
 func WriteContentToFile(path, content string) {
 	var file, err = os.OpenFile(path, os.O_RDWR, 0644)
-	if isError(err) { return }
+	if IsError(err) { return }
 	defer file.Close()
 	
 	_, err = file.WriteString(content)
-	if isError(err) { return }
+	if IsError(err) { return }
 
 	err = file.Sync()
-	if isError(err) { return }
+	if IsError(err) { return }
 	
 	fmt.Println("Done")
 }
 
-func isError(err error) bool {
+func IsError(err error) bool {
 	if err != nil {
-		fmt.Println(err.Error())
+		log.Fatal(err.Error())
 	}
 
 	return (err != nil)
