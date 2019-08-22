@@ -2,6 +2,7 @@ package filegen
 
 import (
 	"flag"
+	"strings"
 	"log"
 	"../populatefile"
 	"../tmpl"
@@ -16,7 +17,7 @@ func Create(kind, fileName, path string)  {
 		return
 	}
 
-	switch kind {
+	switch strings.ToLower(kind) {
 	case "namespace", "ns":
 		fullPath, err := runcmd.Execute(path, generatedFileName)
 		populatefile.IsError(err)
@@ -39,6 +40,10 @@ func Create(kind, fileName, path string)  {
 		populatefile.IsError(err)
 		populatefile.WriteContentToFile(*fullPath, tmpl.ServiceAccount)
 	case "service", "svc":
+	case "kustomize", "kz":
+		fullPath, err := runcmd.Execute(path, generatedFileName)
+		populatefile.IsError(err)
+		populatefile.WriteContentToFile(*fullPath, tmpl.Kustomize)
 	default:
 		log.Print(`doee`)
 		return

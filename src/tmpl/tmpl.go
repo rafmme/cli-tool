@@ -76,3 +76,11 @@ spec:
           emptyDir: {}
       restartPolicy: Always
       imagePullPolicy: Always`
+
+var Kustomize string = `apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- resource_name
+
+namespace: name`
