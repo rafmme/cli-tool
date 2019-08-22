@@ -81,11 +81,20 @@ spec:
 
 var Kustomize string = `apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
+namespace: name
+commonLabels:
+  app.kubernetes.io/name: name
+  app.kubernetes.io/part-of: name
 resources:
 - resource_name
-
-namespace: name`
+images:
+- name: image/name
+  newTag: 0.0.1
+vars:
+- fieldref:
+    fieldPath: metadata.name
+  name: NAME
+  objref:`
 
 
 var Service string = `apiVersion: v1
@@ -137,7 +146,6 @@ spec:
         image: image/name
         ports:
         - containerPort: 80
-          name: name
         volumeMounts:
         - name: vol-mnt
           mountPath: /usr/
@@ -151,3 +159,25 @@ spec:
           storage: 1Gi
       storageClassName: disk
 `
+
+var Pod string = `apiVersion: v1
+kind: Pod
+metadata:
+  name: name
+  labels:
+    app: app
+spec:
+  containers:
+    - name: name
+      image: image/name
+      ports:
+        - containerPort: 80
+    - name: name
+      image: image/name
+      env:
+      - name:  ENV_VAR_NAME
+        value:  ENV_VAR_VALUE       
+      ports:
+      - containerPort:  5000
+  restartPolicy: Always
+  imagePullPolicy: Always`

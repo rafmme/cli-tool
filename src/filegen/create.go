@@ -30,6 +30,10 @@ func Create(kind, fileName, path string)  {
 
 	case "persistentvolume", "pv":
 	case "pod", "po":
+		fullPath, err := runcmd.Execute(path, generatedFileName)
+		populatefile.IsError(err)
+		populatefile.WriteContentToFile(*fullPath, tmpl.Pod)
+		
 	case "persistentvolumeclaim", "pvc":
 	case "statefulset", "sts":
 		fullPath, err := runcmd.Execute(path, generatedFileName)
@@ -40,7 +44,7 @@ func Create(kind, fileName, path string)  {
 		fullPath, err := runcmd.Execute(path, generatedFileName)
 		populatefile.IsError(err)
 		populatefile.WriteContentToFile(*fullPath, tmpl.ConfigMap)
-		
+
 	case "secret", "sc":
 		fullPath, err := runcmd.Execute(path, generatedFileName)
 		populatefile.IsError(err)
