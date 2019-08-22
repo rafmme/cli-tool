@@ -2,7 +2,6 @@ package filegen
 
 import (
 	"flag"
-	"strings"
 	"log"
 	"../populatefile"
 	"../tmpl"
@@ -19,15 +18,14 @@ func Create(kind, fileName, path string)  {
 
 	switch kind {
 	case "namespace", "ns":
-		out, err := runcmd.Execute(path, generatedFileName)
-		fullPath := strings.TrimSpace(string(out[:])) + "/" + generatedFileName
+		fullPath, err := runcmd.Execute(path, generatedFileName)
 
 		if err != nil {
 			log.Fatal(err)
 			return
 		}
 
-		populatefile.WriteContentToFile(fullPath, tmpl.Namespace)
+		populatefile.WriteContentToFile(*fullPath, tmpl.Namespace)
 		break
 
 	case "deployment", "deploy":
