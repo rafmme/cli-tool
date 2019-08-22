@@ -3,6 +3,7 @@ package filegen
 import (
 	"flag"
 	"strings"
+	"log"
 )
 
 func Run() {
@@ -17,6 +18,11 @@ func Run() {
 	flag.Parse()
 	var file string = *fileName
 
+	if strings.ToLower(*extension) != "tf" && strings.ToLower(*extension) != "yaml" {
+		log.Printf(".%s file extension is not supported. Try tf or yaml", *extension)
+		return
+	}
+
 	if *fileName == "default" {
 		file = *kind
 	}
@@ -26,7 +32,7 @@ func Run() {
 	}
 
 	if strings.ToLower(*extension) == "tf" && (strings.ToLower(*kind) != "kz" && strings.ToLower(*kind) != "kustomize") {
-		CreateTerraformFile()
+		CreateTerraformFile(*kind, file, *path)
 		return
 	}
 

@@ -18,104 +18,70 @@ func CreateYAML(kind, fileName, path string)  {
 
 	switch strings.ToLower(kind) {
 	case "namespace", "ns":
-		fullPath, err := runcmd.Execute(path, generatedFileName)
-		populatefile.IsError(err)
-		populatefile.WriteContentToFile(*fullPath, tmpl.Namespace)
+		HandleFileCreation(path, generatedFileName, tmpl.Namespace)
 
 	case "cronjob", "crj":
-		fullPath, err := runcmd.Execute(path, generatedFileName)
-		populatefile.IsError(err)
-		populatefile.WriteContentToFile(*fullPath, tmpl.CronJob)
+		HandleFileCreation(path, generatedFileName, tmpl.CronJob)
 
 	case "clusterrolebinding", "crb":
-		fullPath, err := runcmd.Execute(path, generatedFileName)
-		populatefile.IsError(err)
-		populatefile.WriteContentToFile(*fullPath, tmpl.GenerateRoleBinding("ClusterRoleBinding", "ClusterRole"))
+		HandleFileCreation(
+			path, generatedFileName,
+			tmpl.GenerateRoleBinding("ClusterRoleBinding", "ClusterRole"),
+		)
 
 	case "clusterrole", "cr":
-		fullPath, err := runcmd.Execute(path, generatedFileName)
-		populatefile.IsError(err)
-		populatefile.WriteContentToFile(*fullPath, tmpl.ClusterRole)
+		HandleFileCreation(path, generatedFileName, tmpl.ClusterRole)
 
 	case "job":
-		fullPath, err := runcmd.Execute(path, generatedFileName)
-		populatefile.IsError(err)
-		populatefile.WriteContentToFile(*fullPath, tmpl.Job)
+		HandleFileCreation(path, generatedFileName, tmpl.Job)
 
 	case "daemonset", "dmt":
-		fullPath, err := runcmd.Execute(path, generatedFileName)
-		populatefile.IsError(err)
-		populatefile.WriteContentToFile(*fullPath, tmpl.DaemonSet)
+		HandleFileCreation(path, generatedFileName, tmpl.DaemonSet)
 
 	case "deployment", "deploy", "dpl":
-		fullPath, err := runcmd.Execute(path, generatedFileName)
-		populatefile.IsError(err)
-		populatefile.WriteContentToFile(*fullPath, tmpl.Deployment)
+		HandleFileCreation(path, generatedFileName, tmpl.Deployment)
 
 	case "persistentvolume", "pv":
-		fullPath, err := runcmd.Execute(path, generatedFileName)
-		populatefile.IsError(err)
-		populatefile.WriteContentToFile(*fullPath, tmpl.PersistentVolume)
+		HandleFileCreation(path, generatedFileName, tmpl.PersistentVolume)
 
 	case "pod", "po":
-		fullPath, err := runcmd.Execute(path, generatedFileName)
-		populatefile.IsError(err)
-		populatefile.WriteContentToFile(*fullPath, tmpl.Pod)
+		HandleFileCreation(path, generatedFileName, tmpl.Pod)
 	
 	case "ingress", "ing":
-		fullPath, err := runcmd.Execute(path, generatedFileName)
-		populatefile.IsError(err)
-		populatefile.WriteContentToFile(*fullPath, tmpl.Ingress)
+		HandleFileCreation(path, generatedFileName, tmpl.Ingress)
 
 	case "persistentvolumeclaim", "pvc":
-		fullPath, err := runcmd.Execute(path, generatedFileName)
-		populatefile.IsError(err)
-		populatefile.WriteContentToFile(*fullPath, tmpl.PersistentVolumeClaim)
+		HandleFileCreation(path, generatedFileName, tmpl.PersistentVolumeClaim)
 
 	case "role":
-		fullPath, err := runcmd.Execute(path, generatedFileName)
-		populatefile.IsError(err)
-		populatefile.WriteContentToFile(*fullPath, tmpl.Role)
+		HandleFileCreation(path, generatedFileName, tmpl.Role)
 
 	case "rolebinding", "rb":
-		fullPath, err := runcmd.Execute(path, generatedFileName)
-		populatefile.IsError(err)
-		populatefile.WriteContentToFile(*fullPath, tmpl.GenerateRoleBinding("RoleBinding", "Role"))
+		HandleFileCreation(
+			path, generatedFileName,
+			tmpl.GenerateRoleBinding("RoleBinding", "Role"),
+		)
 
 	case "statefulset", "sts":
-		fullPath, err := runcmd.Execute(path, generatedFileName)
-		populatefile.IsError(err)
-		populatefile.WriteContentToFile(*fullPath, tmpl.StatefulSet)
+		HandleFileCreation(path, generatedFileName, tmpl.StatefulSet)
 
 	case "configmap", "cm":
-		fullPath, err := runcmd.Execute(path, generatedFileName)
-		populatefile.IsError(err)
-		populatefile.WriteContentToFile(*fullPath, tmpl.ConfigMap)
+		HandleFileCreation(path, generatedFileName, tmpl.ConfigMap)
 
 	case "secret", "sc":
-		fullPath, err := runcmd.Execute(path, generatedFileName)
-		populatefile.IsError(err)
-		populatefile.WriteContentToFile(*fullPath, tmpl.Secret)
+		HandleFileCreation(path, generatedFileName, tmpl.Secret)
 
 	case "serviceaccount", "sa":
-		fullPath, err := runcmd.Execute(path, generatedFileName)
-		populatefile.IsError(err)
-		populatefile.WriteContentToFile(*fullPath, tmpl.ServiceAccount)
+		HandleFileCreation(path, generatedFileName, tmpl.ServiceAccount)
 
 	case "service", "svc":
-		fullPath, err := runcmd.Execute(path, generatedFileName)
-		populatefile.IsError(err)
-		populatefile.WriteContentToFile(*fullPath, tmpl.Service)
+		HandleFileCreation(path, generatedFileName, tmpl.Service)
 
 	case "kustomize", "kz":
-		fullPath, err := runcmd.Execute(path, generatedFileName)
-		populatefile.IsError(err)
-		populatefile.WriteContentToFile(*fullPath, tmpl.Kustomize)
+		HandleFileCreation(path, generatedFileName, tmpl.Kustomize)
 
 	case "policy", "pol":
-		fullPath, err := runcmd.Execute(path, generatedFileName)
-		populatefile.IsError(err)
-		populatefile.WriteContentToFile(*fullPath, tmpl.Policy)
+		HandleFileCreation(path, generatedFileName, tmpl.Policy)
 
 	default:
 		log.Printf(`Can't process k8s object type of %s`, kind)
