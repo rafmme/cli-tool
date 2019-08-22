@@ -40,6 +40,9 @@ func Create(kind, fileName, path string)  {
 		populatefile.IsError(err)
 		populatefile.WriteContentToFile(*fullPath, tmpl.ServiceAccount)
 	case "service", "svc":
+		fullPath, err := runcmd.Execute(path, generatedFileName)
+		populatefile.IsError(err)
+		populatefile.WriteContentToFile(*fullPath, tmpl.Service)
 	case "kustomize", "kz":
 		fullPath, err := runcmd.Execute(path, generatedFileName)
 		populatefile.IsError(err)

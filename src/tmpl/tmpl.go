@@ -84,3 +84,18 @@ resources:
 - resource_name
 
 namespace: name`
+
+
+var Service string = `apiVersion: v1
+kind: Service
+metadata:
+  name:  Service Name
+spec:
+  selector:
+    app:  Selector Label
+  type:  LoadBalancer | ClusterIP | NodePort
+  ports:
+  - name:  name-of-the-port
+    port:  80
+    targetPort:  8080
+`
