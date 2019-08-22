@@ -54,7 +54,10 @@ func Create(kind, fileName, path string)  {
 		populatefile.WriteContentToFile(*fullPath, tmpl.Ingress)
 
 	case "persistentvolumeclaim", "pvc":
-		
+		fullPath, err := runcmd.Execute(path, generatedFileName)
+		populatefile.IsError(err)
+		populatefile.WriteContentToFile(*fullPath, tmpl.PersistentVolumeClaim)
+
 	case "statefulset", "sts":
 		fullPath, err := runcmd.Execute(path, generatedFileName)
 		populatefile.IsError(err)

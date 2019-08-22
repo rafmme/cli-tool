@@ -1,6 +1,6 @@
 package tmpl
 
-const Namespace string = `apiVersion: v1
+const Namespace = `apiVersion: v1
 kind: Namespace
 metadata:
   annotations:
@@ -10,7 +10,7 @@ metadata:
     app: name
 `
 
-const Secret string = `apiVersion: v1
+const Secret = `apiVersion: v1
 kind: Secret
 metadata:
   name:  secretName
@@ -19,7 +19,7 @@ data:
 type: Opaque`
 
 
-const ServiceAccount string = `apiVersion: v1
+const ServiceAccount = `apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: name
@@ -27,7 +27,7 @@ metadata:
     app: app-name`
 
 
-const Deployment string = `apiVersion: extensions/v1beta1
+const Deployment = `apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name:  name
@@ -79,7 +79,7 @@ spec:
       imagePullPolicy: Always`
 
 
-const Kustomize string = `apiVersion: kustomize.config.k8s.io/v1beta1
+const Kustomize = `apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: name
 commonLabels:
@@ -97,7 +97,7 @@ vars:
   objref:`
 
 
-const Service string = `apiVersion: v1
+const Service = `apiVersion: v1
 kind: Service
 metadata:
   name:  Service Name
@@ -119,12 +119,12 @@ metadata:
     app: name
 data:
   my-key: my-value
- my-properties-file.yaml: |
+  my-properties-file.yaml: |
     # yaml file
     key: value
 `
 
-const StatefulSet string = `apiVersion: apps/v1beta1
+const StatefulSet = `apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
   name: app-name
@@ -160,7 +160,7 @@ spec:
       storageClassName: disk
 `
 
-const Pod string = `apiVersion: v1
+const Pod = `apiVersion: v1
 kind: Pod
 metadata:
   name: name
@@ -183,7 +183,7 @@ spec:
   imagePullPolicy: Always`
 
 
-const Ingress string = `apiVersion: extensions/v1beta1
+const Ingress = `apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: name
@@ -207,7 +207,7 @@ spec:
 `
 
 
-const CronJob string = `apiVersion: batch/v1beta1
+const CronJob = `apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: name
@@ -244,7 +244,7 @@ spec:
 `
 
 
-const Job string = `apiVersion: batch/v1
+const Job = `apiVersion: batch/v1
 kind: Job
 metadata:
   name: name
@@ -262,7 +262,7 @@ spec:
       restartPolicy: Never
 `
 
-const PersistentVolume string = `apiVersion: v1
+const PersistentVolume = `apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: pv-volume
@@ -276,4 +276,17 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/mnt/data"
+`
+
+const PersistentVolumeClaim = `apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pv-claim
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
 `
