@@ -114,3 +114,40 @@ data:
     # yaml file
     key: value
 `
+
+var StatefulSet string = `apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: app-name
+  labels:
+    app: app
+spec:
+  serviceName: "serviceName"
+  selector:
+    matchLabels:
+      app: app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - name: name
+        image: image/name
+        ports:
+        - containerPort: 80
+          name: name
+        volumeMounts:
+        - name: vol-mnt
+          mountPath: /usr/
+  volumeClaimTemplates:
+  - metadata:
+      name: vol-mnt
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+      storageClassName: disk
+`

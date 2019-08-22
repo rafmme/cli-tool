@@ -27,29 +27,40 @@ func Create(kind, fileName, path string)  {
 		fullPath, err := runcmd.Execute(path, generatedFileName)
 		populatefile.IsError(err)
 		populatefile.WriteContentToFile(*fullPath, tmpl.Deployment)
+
 	case "persistentvolume", "pv":
 	case "pod", "po":
 	case "persistentvolumeclaim", "pvc":
+	case "statefulset", "sts":
+		fullPath, err := runcmd.Execute(path, generatedFileName)
+		populatefile.IsError(err)
+		populatefile.WriteContentToFile(*fullPath, tmpl.StatefulSet)
+
 	case "configmap", "cm":
 		fullPath, err := runcmd.Execute(path, generatedFileName)
 		populatefile.IsError(err)
 		populatefile.WriteContentToFile(*fullPath, tmpl.ConfigMap)
+		
 	case "secret", "sc":
 		fullPath, err := runcmd.Execute(path, generatedFileName)
 		populatefile.IsError(err)
 		populatefile.WriteContentToFile(*fullPath, tmpl.Secret)
+
 	case "serviceaccount", "sa":
 		fullPath, err := runcmd.Execute(path, generatedFileName)
 		populatefile.IsError(err)
 		populatefile.WriteContentToFile(*fullPath, tmpl.ServiceAccount)
+
 	case "service", "svc":
 		fullPath, err := runcmd.Execute(path, generatedFileName)
 		populatefile.IsError(err)
 		populatefile.WriteContentToFile(*fullPath, tmpl.Service)
+
 	case "kustomize", "kz":
 		fullPath, err := runcmd.Execute(path, generatedFileName)
 		populatefile.IsError(err)
 		populatefile.WriteContentToFile(*fullPath, tmpl.Kustomize)
+
 	default:
 		log.Print(`doee`)
 		return
