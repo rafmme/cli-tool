@@ -4,6 +4,7 @@ import (
 	"os"
 	"log"
 	"fmt"
+	"strings"
 )
 
 func WriteContentToFile(path, content string) {
@@ -17,7 +18,7 @@ func WriteContentToFile(path, content string) {
 	err = file.Sync()
 	if IsError(err) { return }
 	
-	fmt.Println("Done")
+	fmt.Println(strings.TrimSpace(fmt.Sprintf("File %s has been successfully created", path)))
 }
 
 func IsError(err error) bool {
