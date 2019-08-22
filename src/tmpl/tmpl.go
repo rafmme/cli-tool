@@ -1,6 +1,6 @@
 package tmpl
 
-var Namespace string = `apiVersion: v1
+const Namespace string = `apiVersion: v1
 kind: Namespace
 metadata:
   annotations:
@@ -10,7 +10,7 @@ metadata:
     app: name
 `
 
-var Secret string = `apiVersion: v1
+const Secret string = `apiVersion: v1
 kind: Secret
 metadata:
   name:  secretName
@@ -19,7 +19,7 @@ data:
 type: Opaque`
 
 
-var ServiceAccount string = `apiVersion: v1
+const ServiceAccount string = `apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: name
@@ -27,7 +27,7 @@ metadata:
     app: app-name`
 
 
-var Deployment string = `apiVersion: extensions/v1beta1
+const Deployment string = `apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name:  name
@@ -79,7 +79,7 @@ spec:
       imagePullPolicy: Always`
 
 
-var Kustomize string = `apiVersion: kustomize.config.k8s.io/v1beta1
+const Kustomize string = `apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: name
 commonLabels:
@@ -97,7 +97,7 @@ vars:
   objref:`
 
 
-var Service string = `apiVersion: v1
+const Service string = `apiVersion: v1
 kind: Service
 metadata:
   name:  Service Name
@@ -111,7 +111,7 @@ spec:
     targetPort:  8080
 `
 
-var ConfigMap = `apiVersion: v1
+const ConfigMap = `apiVersion: v1
 kind: ConfigMap
 metadata:
   name: app-configmap
@@ -124,7 +124,7 @@ data:
     key: value
 `
 
-var StatefulSet string = `apiVersion: apps/v1beta1
+const StatefulSet string = `apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
   name: app-name
@@ -160,7 +160,7 @@ spec:
       storageClassName: disk
 `
 
-var Pod string = `apiVersion: v1
+const Pod string = `apiVersion: v1
 kind: Pod
 metadata:
   name: name
@@ -181,3 +181,27 @@ spec:
       - containerPort:  5000
   restartPolicy: Always
   imagePullPolicy: Always`
+
+
+const Ingress string = `apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: name
+  labels:
+    app: app-label
+  annotations:
+    ingress.kubernetes.io/backends: ""
+spec:
+  rules:
+    - host: host
+      http:
+        paths:
+          - backend:
+              serviceName: serviceName
+              servicePort: servicePort
+  tls:
+  - hosts:
+    - host.com
+    - host-api.com
+    secretName: secrets-name
+`

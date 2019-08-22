@@ -33,7 +33,11 @@ func Create(kind, fileName, path string)  {
 		fullPath, err := runcmd.Execute(path, generatedFileName)
 		populatefile.IsError(err)
 		populatefile.WriteContentToFile(*fullPath, tmpl.Pod)
-		
+	
+	case "ingress", "ing":
+		fullPath, err := runcmd.Execute(path, generatedFileName)
+		populatefile.IsError(err)
+		populatefile.WriteContentToFile(*fullPath, tmpl.Ingress)
 	case "persistentvolumeclaim", "pvc":
 	case "statefulset", "sts":
 		fullPath, err := runcmd.Execute(path, generatedFileName)
@@ -75,8 +79,13 @@ func Run() {
 	kind := flag.String("kind", "", "Kubernetes API Object")
 	path := flag.String("path", ".", "Path to create the file [OPTIONAL]")
 	fileName := flag.String("filename", "default", "Name for the generated file [OPTIONAL]")
-	
 	flag.Parse()
 
-	Create(*kind, *fileName, *path)
+	var file string = *fileName
+
+	if *fileName == "default" {
+		file = *kind
+	}
+
+	Create(*kind, file, *path)
 }
