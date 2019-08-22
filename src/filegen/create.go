@@ -105,6 +105,10 @@ func Run() {
 	if *fileName == "default" {
 		file = *kind
 	}
+	
+	if strings.ToLower(*kind) == "kz" || strings.ToLower(*kind) == "kustomize" {
+		file = "kustomization"
+	}
 
 	Create(*kind, file, *path)
 }
