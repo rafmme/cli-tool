@@ -261,3 +261,19 @@ spec:
         command: ["echo",  "hello"]
       restartPolicy: Never
 `
+
+const PersistentVolume string = `apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+`
