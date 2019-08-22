@@ -28,6 +28,16 @@ func Create(kind, fileName, path string)  {
 		populatefile.IsError(err)
 		populatefile.WriteContentToFile(*fullPath, tmpl.CronJob)
 
+	case "clusterrolebinding", "crb":
+		fullPath, err := runcmd.Execute(path, generatedFileName)
+		populatefile.IsError(err)
+		populatefile.WriteContentToFile(*fullPath, tmpl.GenerateRoleBinding("ClusterRoleBinding", "ClusterRole"))
+
+	case "clusterrole", "cr":
+		fullPath, err := runcmd.Execute(path, generatedFileName)
+		populatefile.IsError(err)
+		populatefile.WriteContentToFile(*fullPath, tmpl.ClusterRole)
+
 	case "job":
 		fullPath, err := runcmd.Execute(path, generatedFileName)
 		populatefile.IsError(err)
@@ -57,6 +67,16 @@ func Create(kind, fileName, path string)  {
 		fullPath, err := runcmd.Execute(path, generatedFileName)
 		populatefile.IsError(err)
 		populatefile.WriteContentToFile(*fullPath, tmpl.PersistentVolumeClaim)
+
+	case "role":
+		fullPath, err := runcmd.Execute(path, generatedFileName)
+		populatefile.IsError(err)
+		populatefile.WriteContentToFile(*fullPath, tmpl.Role)
+
+	case "rolebinding", "rb":
+		fullPath, err := runcmd.Execute(path, generatedFileName)
+		populatefile.IsError(err)
+		populatefile.WriteContentToFile(*fullPath, tmpl.GenerateRoleBinding("RoleBinding", "Role"))
 
 	case "statefulset", "sts":
 		fullPath, err := runcmd.Execute(path, generatedFileName)
@@ -94,7 +114,7 @@ func Create(kind, fileName, path string)  {
 		populatefile.WriteContentToFile(*fullPath, tmpl.Policy)
 
 	default:
-		log.Print(`doee`)
+		log.Printf(`Can't process k8s object type of %s`, kind)
 		return
 	}
 }

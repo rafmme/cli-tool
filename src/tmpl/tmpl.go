@@ -1,5 +1,7 @@
 package tmpl
 
+import "fmt"
+
 const Namespace = `apiVersion: v1
 kind: Namespace
 metadata:
@@ -304,3 +306,54 @@ spec:
     matchLabels:
       app: app
 `
+
+const ClusterRole = `apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: name
+  labels:
+    app: app
+rules:
+- apiGroups: [""]
+  resources:
+  - nodes
+  - nodes/proxy
+  - services
+  - endpoints
+  - pods
+  verbs: ["get", "list", "watch"]
+`
+
+const Role = `apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: Role
+metadata:
+  name: name
+  labels:
+    app: app
+rules:
+- apiGroups:
+  - extensions
+  resources:
+  - podsecuritypolicies
+  resourceNames:
+  - privileged
+  verbs:
+  - use`
+
+
+func GenerateRoleBinding(roleBindingType, roleType string) string  {
+  return fmt.Sprintf(`apiVersion: rbac.authorization.k8s.io/v1beta1
+  kind: %s
+  metadata:
+    name: name
+    labels:
+      app: app
+  roleRef:
+    apiGroup: rbac.authorization.k8s.io
+    kind: %s
+    name: role-name
+  subjects:
+  - kind: ServiceAccount
+    name: sa-name
+  `, roleBindingType, roleType)
+}
