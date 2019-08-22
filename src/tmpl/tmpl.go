@@ -205,3 +205,40 @@ spec:
     - host-api.com
     secretName: secrets-name
 `
+
+
+const CronJob string = `apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: name
+  namespace: name
+spec:
+  jobTemplate:
+    metadata:
+    spec:
+      template:
+        metadata:
+        spec:
+          containers:
+            - name: name
+              image: image/name
+              command: ['sh', '-c']
+              args:
+                - |
+                  echo "hello"
+              volumeMounts:
+                - name: vol-mnts
+                  mountPath: /vol
+                  readOnly: true
+          restartPolicy: OnFailure
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+          volumes:
+            - name: vol-mnts
+              secret:
+                defaultMode: 420
+                secretName: vol-mnts
+  schedule: '0 */23 * * *'
+  successfulJobsHistoryLimit: 1
+`
