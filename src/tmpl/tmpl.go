@@ -10,6 +10,14 @@ metadata:
     app: name
 `
 
+var Secret string = `apiVersion: v1
+kind: Secret
+metadata:
+  name:  secretName
+data:
+  secretKey:  BASE64_ENCODED_VALUE
+type: Opaque`
+
 var Deployment string = `apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:

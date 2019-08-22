@@ -31,6 +31,9 @@ func Create(kind, fileName, path string)  {
 	case "persistentvolumeclaim", "pvc":
 	case "configmap", "cm":
 	case "secret", "sc":
+		fullPath, err := runcmd.Execute(path, generatedFileName)
+		populatefile.IsError(err)
+		populatefile.WriteContentToFile(*fullPath, tmpl.Secret)
 	case "serviceaccount", "sa":
 	case "service", "svc":
 	default:
