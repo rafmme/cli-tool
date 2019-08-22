@@ -28,6 +28,11 @@ func Create(kind, fileName, path string)  {
 		populatefile.IsError(err)
 		populatefile.WriteContentToFile(*fullPath, tmpl.CronJob)
 
+	case "job":
+		fullPath, err := runcmd.Execute(path, generatedFileName)
+		populatefile.IsError(err)
+		populatefile.WriteContentToFile(*fullPath, tmpl.Job)
+
 	case "deployment", "deploy", "dpl":
 		fullPath, err := runcmd.Execute(path, generatedFileName)
 		populatefile.IsError(err)

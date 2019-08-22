@@ -242,3 +242,22 @@ spec:
   schedule: '0 */23 * * *'
   successfulJobsHistoryLimit: 1
 `
+
+
+const Job string = `apiVersion: batch/v1
+kind: Job
+metadata:
+  name: name
+spec:
+  backoffLimit: 5
+  activeDeadlineSeconds: 100
+  template:
+    metadata:
+      name: name
+    spec:
+      containers:
+      - name: name
+        image: image/name
+        command: ["echo",  "hello"]
+      restartPolicy: Never
+`
