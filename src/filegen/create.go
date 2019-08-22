@@ -43,6 +43,11 @@ func Create(kind, fileName, path string)  {
 		populatefile.IsError(err)
 		populatefile.WriteContentToFile(*fullPath, tmpl.Job)
 
+	case "daemonset", "dmt":
+		fullPath, err := runcmd.Execute(path, generatedFileName)
+		populatefile.IsError(err)
+		populatefile.WriteContentToFile(*fullPath, tmpl.DaemonSet)
+
 	case "deployment", "deploy", "dpl":
 		fullPath, err := runcmd.Execute(path, generatedFileName)
 		populatefile.IsError(err)

@@ -341,6 +341,51 @@ rules:
   - use`
 
 
+const DaemonSet = `apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: name
+  namespace: name
+  labels:
+    app: name
+spec:
+  selector:
+    matchLabels:
+      name: name
+  template:
+    metadata:
+      labels:
+        name: name
+    spec:
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+      containers:
+      - name: name
+        image: gcr.io/image/name
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        volumeMounts:
+        - name: varlog
+          mountPath: /var/log
+        - name: varlibdockercontainers
+          mountPath: /var/lib/docker/containers
+          readOnly: true
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: varlog
+        hostPath:
+          path: /var/log
+      - name: varlibdockercontainers
+        hostPath:
+          path: /var/lib/docker/containers
+`
+  
+
 func GenerateRoleBinding(roleBindingType, roleType string) string  {
   return fmt.Sprintf(`apiVersion: rbac.authorization.k8s.io/v1beta1
   kind: %s
