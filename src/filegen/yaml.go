@@ -3,9 +3,7 @@ package filegen
 import (
 	"strings"
 	"log"
-	"../populatefile"
 	"../tmpl"
-	"../runcmd"
 )
 
 func CreateYAML(kind, fileName, path string)  {

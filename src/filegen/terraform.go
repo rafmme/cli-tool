@@ -18,6 +18,9 @@ func CreateTerraformFile(kind, fileName, path string)  {
 	case "namespace", "ns":
 		HandleFileCreation(path, generatedFileName, tmpl.TF_Namespace)
 
+	case "provider", "pvd":
+		HandleFileCreation(path, generatedFileName, tmpl.TF_K8S_PROVIDER)
+
 	case "cronjob", "crj":
 
 	case "clusterrolebinding", "crb":
