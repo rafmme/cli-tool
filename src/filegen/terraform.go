@@ -39,6 +39,7 @@ func CreateTerraformFile(kind, fileName, path string)  {
 	case "pod", "po":
 	
 	case "ingress", "ing":
+		HandleFileCreation(path, generatedFileName, tmpl.TF_Ingress)
 
 	case "persistentvolumeclaim", "pvc":
 
