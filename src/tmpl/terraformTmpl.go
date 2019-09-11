@@ -96,3 +96,42 @@ const TF_Cron_Job = `resource "kubernetes_cron_job" "demo" {
 	  }
 	}
 }`
+
+
+const TF_CR = `resource "kubernetes_cluster_role" "example" {
+	metadata {
+	  name = "terraform-example"
+	}
+  
+	rule {
+	  api_groups = [""]
+	  resources  = ["namespaces", "pods"]
+	  verbs      = ["get", "list", "watch"]
+	}
+}`
+
+const TF_CRB = `resource "kubernetes_cluster_role_binding" "example" {
+	metadata {
+	  name = "terraform-example"
+	}
+	role_ref {
+	  api_group = "rbac.authorization.k8s.io"
+	  kind      = "ClusterRole"
+	  name      = "cluster-admin"
+	}
+	subject {
+	  kind      = "User"
+	  name      = "admin"
+	  api_group = "rbac.authorization.k8s.io"
+	}
+	subject {
+	  kind      = "ServiceAccount"
+	  name      = "default"
+	  namespace = "kube-system"
+	}
+	subject {
+	  kind      = "Group"
+	  name      = "system:masters"
+	  api_group = "rbac.authorization.k8s.io"
+	}
+}`
