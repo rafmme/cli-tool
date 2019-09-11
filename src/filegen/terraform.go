@@ -22,6 +22,7 @@ func CreateTerraformFile(kind, fileName, path string)  {
 		HandleFileCreation(path, generatedFileName, tmpl.TF_K8S_PROVIDER)
 
 	case "cronjob", "crj":
+		HandleFileCreation(path, generatedFileName, tmpl.TF_Cron_Job)
 
 	case "clusterrolebinding", "crb":
 
