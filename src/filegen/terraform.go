@@ -31,6 +31,7 @@ func CreateTerraformFile(kind, fileName, path string)  {
 		HandleFileCreation(path, generatedFileName, tmpl.TF_CR)
 
 	case "job":
+		HandleFileCreation(path, generatedFileName, tmpl.TF_Job)
 
 	case "daemonset", "dmt":
 

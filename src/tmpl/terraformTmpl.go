@@ -135,3 +135,24 @@ const TF_CRB = `resource "kubernetes_cluster_role_binding" "example" {
 	  api_group = "rbac.authorization.k8s.io"
 	}
 }`
+
+
+const TF_Job = `resource "kubernetes_job" "demo" {
+	metadata {
+	  name = "demo"
+	}
+	spec {
+	  template {
+		metadata {}
+		spec {
+		  container {
+			name    = "pi"
+			image   = "perl"
+			command = ["perl", "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+		  }
+		  restart_policy = "Never"
+		}
+	  }
+	  backoff_limit = 4
+	}
+}`
